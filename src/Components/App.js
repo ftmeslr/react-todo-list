@@ -4,10 +4,13 @@ import FormAddTodo from "./FormAddTodo";
 import { useState } from "react";
 function App() {
   const [todos, setTodos] = useState([]);
+  const [statusDone, setStatusDone] = useState(false);
 
   const addTodo = (text) => {
     setTodos([...todos, { id: Date.now(), done: false, text }]);
   };
+
+  const filterTodos = todos.filter((item) => item.done === statusDone);
 
   return (
     <>
@@ -31,26 +34,46 @@ function App() {
                 <div className="d-flex flex-column align-items-center ">
                   <nav className="col-6 mb-3">
                     <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                      <a
-                        href="google.com"
-                        className="nav-item nav-link active font-weight-bold"
+                      <div
+                        className={`nav-item nav-link  font-weight-bold ${
+                          !statusDone ? "active" : ""
+                        }`}
                         id="nav-home-tab"
+                        onClick={() => {
+                          setStatusDone(false);
+                        }}
                       >
-                        undone <span className="badge badge-secondary">9</span>
-                      </a>
-                      <a
-                        href="google.com"
-                        className="nav-item nav-link font-weight-bold"
+                        undone{" "}
+                        <span
+                          className="badge badge-secondary "
+                          style={{ color: "red" }}
+                        >
+                          {todos.filter((item) => item.done === false).length}
+                        </span>
+                      </div>
+                      <div
+                        className={`nav-item nav-link font-weight-bold ${
+                          statusDone ? "active" : ""
+                        }`}
                         id="nav-profile-tab"
+                        onClick={() => {
+                          setStatusDone(true);
+                        }}
                       >
-                        done <span className="badge badge-success">9</span>
-                      </a>
+                        done{" "}
+                        <span
+                          className="badge badge-success"
+                          style={{ color: "red" }}
+                        >
+                          {todos.filter((item) => item.done === true).length}
+                        </span>
+                      </div>
                     </div>
                   </nav>
-                  {todos.length === 0 ? (
+                  {filterTodos.length === 0 ? (
                     <p>there is no Todo</p>
                   ) : (
-                    todos.map((item) => {
+                    filterTodos.map((item) => {
                       return <Todo key={item.id} text={item.text} />;
                     })
                   )}
