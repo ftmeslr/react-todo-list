@@ -1,5 +1,14 @@
 import Header from "./Header";
+import Todo from "./Todo";
+import FormAddTodo from "./FormAddTodo";
+import { useState } from "react";
 function App() {
+  const [todos, setTodos] = useState([]);
+
+  const addTodo = (text) => {
+    setTodos([...todos, { id: Date.now(), done: false, text }]);
+  };
+
   return (
     <>
       <body>
@@ -13,14 +22,7 @@ function App() {
                   To get started, add some items to your list:
                 </p>
                 <div className="form-inline">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control mx-sm-3"
-                      placeholder="i want to do ..."
-                    />
-                    <button className="btn btn-primary">add</button>
-                  </div>
+                  <FormAddTodo add={addTodo} />
                 </div>
               </div>
             </section>
@@ -45,54 +47,13 @@ function App() {
                       </a>
                     </div>
                   </nav>
-                  <div className="col-6 mb-2">
-                    <div className="d-flex justify-content-between align-items-center border rounded p-3">
-                      <div>hello roocket</div>
-                      <div>
-                        <button type="button" className="btn btn-info btn-sm">
-                          edit
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-danger btn-sm ml-1"
-                        >
-                          delete
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-6 mb-2">
-                    <div className="d-flex justify-content-between align-items-center border rounded p-3">
-                      <div>hello roocket</div>
-                      <div>
-                        <button type="button" className="btn btn-info btn-sm">
-                          edit
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-danger btn-sm ml-1"
-                        >
-                          delete
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-6 mb-2">
-                    <div className="d-flex justify-content-between align-items-center border rounded p-3">
-                      <div>hello roocket</div>
-                      <div>
-                        <button type="button" className="btn btn-info btn-sm">
-                          edit
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-danger btn-sm ml-1"
-                        >
-                          delete
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                  {todos.length === 0 ? (
+                    <p>there is no Todo</p>
+                  ) : (
+                    todos.map((item) => {
+                      return <Todo key={item.id} text={item.text} />;
+                    })
+                  )}
                 </div>
               </div>
             </div>
