@@ -1,22 +1,10 @@
-import "./App.css";
-
+import Header from "./Header";
 function App() {
   return (
     <>
       <body>
         <div className="App">
-          <header>
-            <div className="navbar navbar-dark bg-dark shadow-sm">
-              <div className="container d-flex justify-content-between">
-                <a
-                  href="google.com"
-                  className="navbar-brand d-flex align-items-center"
-                >
-                  <strong>Todo App</strong>
-                </a>
-              </div>
-            </div>
-          </header>
+          <Header />
           <main>
             <section className="jumbotron">
               <div className="container d-flex flex-column align-items-center">
