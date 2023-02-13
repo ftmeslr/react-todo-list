@@ -9,6 +9,10 @@ function App() {
   const addTodo = (text) => {
     setTodos([...todos, { id: Date.now(), done: false, text }]);
   };
+  const deleteTodo = (id) => {
+    const filterTodos = todos.filter((item) => item.id !== id);
+    setTodos(filterTodos);
+  };
 
   const filterTodos = todos.filter((item) => item.done === statusDone);
 
@@ -60,7 +64,7 @@ function App() {
                           setStatusDone(true);
                         }}
                       >
-                        done{" "}
+                        done
                         <span
                           className="badge badge-success"
                           style={{ color: "red" }}
@@ -74,7 +78,9 @@ function App() {
                     <p>there is no Todo</p>
                   ) : (
                     filterTodos.map((item) => {
-                      return <Todo key={item.id} text={item.text} />;
+                      return (
+                        <Todo key={item.id} item={item} remove={deleteTodo} />
+                      );
                     })
                   )}
                 </div>

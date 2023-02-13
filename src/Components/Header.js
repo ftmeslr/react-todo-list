@@ -3,12 +3,12 @@ const Header = () => {
     <header>
       <div className="navbar navbar-dark bg-dark shadow-sm">
         <div className="container d-flex justify-content-between">
-          <a
-            href="google.com"
+          <div
+           
             className="navbar-brand d-flex align-items-center"
           >
             <strong>Todo App</strong>
-          </a>
+          </div>
         </div>
       </div>
     </header>
