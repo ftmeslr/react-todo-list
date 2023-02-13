@@ -13,8 +13,14 @@ function App() {
     const filterTodos = todos.filter((item) => item.id !== id);
     setTodos(filterTodos);
   };
-
   const filterTodos = todos.filter((item) => item.done === statusDone);
+
+  const doneToggle = (id) => {
+    const item = todos.find((item) => item.id === id);
+    item.done = !item.done ;
+    let newTodos = todos.filter((item) => item.id !== id);
+    setTodos([...newTodos, item]);
+  };
 
   return (
     <>
@@ -79,7 +85,12 @@ function App() {
                   ) : (
                     filterTodos.map((item) => {
                       return (
-                        <Todo key={item.id} item={item} remove={deleteTodo} />
+                        <Todo
+                          key={item.id}
+                          item={item}
+                          remove={deleteTodo}
+                          doneChange={doneToggle}
+                        />
                       );
                     })
                   )}
