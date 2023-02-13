@@ -22,6 +22,10 @@ function App() {
     setTodos([...newTodos, item]);
   };
 
+  const editTodo = (text) => {
+    console.log(text)
+  }
+
   return (
     <>
       <body>
@@ -90,6 +94,7 @@ function App() {
                           item={item}
                           remove={deleteTodo}
                           doneChange={doneToggle}
+                          edit = {editTodo}
                         />
                       );
                     })
